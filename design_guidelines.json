@@ -1,0 +1,160 @@
+{
+  "theme": "Light",
+  "archetype": "1 (Organic & Earthy) with Luxury Elements",
+  "brand_name": "Nepal Trip",
+  "colors": {
+    "background": "#FAFAF8",
+    "surface": "#FFFFFF",
+    "primary": "#1C3144",
+    "secondary": "#4A4A4A",
+    "accent_1": "#DC143C",
+    "accent_2": "#EAA015",
+    "text_primary": "#1C3144",
+    "text_secondary": "#4A4A4A",
+    "border": "#E5E5E5"
+  },
+  "typography": {
+    "heading_font": "Cormorant Garamond",
+    "body_font": "Manrope",
+    "rules": {
+      "h1": "text-5xl sm:text-6xl+ tracking-tight font-light",
+      "h2": "text-3xl sm:text-4xl tracking-tight",
+      "h3": "text-2xl sm:text-3xl",
+      "body": "text-base leading-relaxed",
+      "overline": "uppercase text-sm tracking-[0.2em] font-bold"
+    }
+  },
+  "layout_and_spacing": {
+    "container_padding": "px-6 md:px-12 lg:px-24",
+    "section_spacing": "py-24 lg:py-32",
+    "bento_grid": "grid grid-cols-1 md:grid-cols-12 gap-8",
+    "border_radius": "rounded-none md:rounded-sm"
+  },
+  "components": {
+    "header": {
+      "style": "Crystal Glass - backdrop-blur-xl bg-white/90 border-b border-border/40 z-50 sticky top-0",
+      "links": ["Home", "About Us", "Packages", "Services", "Testimonials", "Contact Us"]
+    },
+    "hero": {
+      "style": "Cinematic full-width slider with asymmetrical overlay bg-black/40. Left-aligned typography."
+    },
+    "buttons": {
+      "primary": "bg-[#1C3144] text-white hover:bg-[#1C3144]/90 px-8 py-4 uppercase tracking-wider text-sm transition-colors",
+      "accent": "bg-[#DC143C] text-white hover:bg-[#DC143C]/90 px-8 py-4 uppercase tracking-wider text-sm transition-colors"
+    },
+    "cards": {
+      "services": "Cardless approach or 1px border with no shadow, sharp corners, hover:scale-[1.02] transition-transform duration-300",
+      "packages": "Image-first cards with gradient overlay from bottom, text white."
+    }
+  },
+  "media": {
+    "hero_slider": [
+      {
+        "title": "Nepal Mountain",
+        "url": "https://images.unsplash.com/photo-1637846959991-18e54d6e2035?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwxfHxoaW1hbGF5YXMlMjBtb3VudGFpbiUyMHBlYWt8ZW58MHx8fHwxNzgxOTg0NjgzfDA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Kashmir Tour",
+        "url": "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwxfHxrYXNobWlyJTIwZGFsJTIwbGFrZXxlbnwwfHx8fDE3ODE5ODQ2ODN8MA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Kailash Mansarovar",
+        "url": "https://images.unsplash.com/photo-1606163338600-0e212c836bb3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwxfHxtb3VudCUyMGthaWxhc2h8ZW58MHx8fHwxNzgxOTg0NjgzfDA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Kathmandu Tour",
+        "url": "https://images.unsplash.com/photo-1648298470994-7065f521375c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODh8MHwxfHNlYXJjaHwxfHxrYXRobWFuZHUlMjB0ZW1wbGV8ZW58MHx8fHwxNzgxOTg0NjgzfDA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Pokhara Tour",
+        "url": "https://images.pexels.com/photos/6423847/pexels-photo-6423847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      }
+    ],
+    "about_us": {
+      "url": "https://images.unsplash.com/photo-1518002054494-3a6f94352e9d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNTl8MHwxfHNlYXJjaHwxfHxuZXBhbCUyMGN1bHR1cmUlMjBoZXJpdGFnZXxlbnwwfHx8fDE3ODE5ODQ2ODN8MA&ixlib=rb-4.1.0&q=85"
+    },
+    "services": [
+      {
+        "title": "Tour Operator",
+        "url": "https://images.pexels.com/photos/842155/pexels-photo-842155.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      },
+      {
+        "title": "Airline Ticketing",
+        "url": "https://images.unsplash.com/photo-1616620418290-81a162f05e5d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHw0fHxsdXh1cnklMjB0cmF2ZWwlMjB0cmFuc3BvcnR8ZW58MHx8fHwxNzgxOTg0NjgzfDA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Cruise Services",
+        "url": "https://images.pexels.com/photos/18029608/pexels-photo-18029608.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      },
+      {
+        "title": "Railway Ticketing",
+        "url": "https://images.pexels.com/photos/18029603/pexels-photo-18029603.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      },
+      {
+        "title": "Car & Coach Rental",
+        "url": "https://images.unsplash.com/photo-1620847969788-5326713ecb89?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjB0cmF2ZWwlMjB0cmFuc3BvcnR8ZW58MHx8fHwxNzgxOTg0NjgzfDA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Hotel Booking Services",
+        "url": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA4Mzl8MHwxfHNlYXJjaHwzfHx0cmF2ZWwlMjBwbGFubmluZyUyMGJvb2tpbmd8ZW58MHx8fHwxNzgxOTg0NjgzfDA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Passport & Visa",
+        "url": "https://images.unsplash.com/photo-1578894381163-e72c17f2d45f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA4Mzl8MHwxfHNlYXJjaHw0fHx0cmF2ZWwlMjBwbGFubmluZyUyMGJvb2tpbmd8ZW58MHx8fHwxNzgxOTg0NjgzfDA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Travel Insurance",
+        "url": "https://images.unsplash.com/photo-1496950866446-3253e1470e8e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA4Mzl8MHwxfHNlYXJjaHwyfHx0cmF2ZWwlMjBwbGFubmluZyUyMGJvb2tpbmd8ZW58MHx8fHwxNzgxOTg0NjgzfDA&ixlib=rb-4.1.0&q=85"
+      }
+    ],
+    "packages": [
+      {
+        "title": "Kathmandu",
+        "url": "https://images.pexels.com/photos/28831413/pexels-photo-28831413.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      },
+      {
+        "title": "Pokhara",
+        "url": "https://images.pexels.com/photos/37836764/pexels-photo-37836764.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      },
+      {
+        "title": "Chitwan",
+        "url": "https://images.pexels.com/photos/18465379/pexels-photo-18465379.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      },
+      {
+        "title": "Gorakhpur",
+        "url": "https://images.unsplash.com/photo-1550642249-6e5605421172?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNTl8MHwxfHNlYXJjaHwyfHxuZXBhbCUyMGN1bHR1cmUlMjBoZXJpdGFnZXxlbnwwfHx8fDE3ODE5ODQ2ODN8MA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Shimla",
+        "url": "https://images.pexels.com/photos/8659357/pexels-photo-8659357.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      },
+      {
+        "title": "New Delhi",
+        "url": "https://images.unsplash.com/photo-1550642249-b715bc35f898?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNTl8MHwxfHNlYXJjaHwzfHxuZXBhbCUyMGN1bHR1cmUlMjBoZXJpdGFnZXxlbnwwfHx8fDE3ODE5ODQ2ODN8MA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Nagarkot",
+        "url": "https://images.unsplash.com/photo-1718179634911-8551f8b0cccf?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNTl8MHwxfHNlYXJjaHw0fHxuZXBhbCUyMGN1bHR1cmUlMjBoZXJpdGFnZXxlbnwwfHx8fDE3ODE5ODQ2ODN8MA&ixlib=rb-4.1.0&q=85"
+      }
+    ],
+    "testimonials": [
+      {
+        "name": "Raj Gopal Yadav",
+        "url": "https://images.unsplash.com/photo-1779630986800-f0ed643f357b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwzfHxpbmRpYW4lMjBtYW4lMjBwb3J0cmFpdCUyMHNtaWxpbmd8ZW58MHx8fHwxNzgxOTg0NjgzfDA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "name": "Deepak Singh",
+        "url": "https://images.unsplash.com/photo-1757744705465-ea08b0ddc38a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwxfHxpbmRpYW4lMjBtYW4lMjBwb3J0cmFpdCUyMHNtaWxpbmd8ZW58MHx8fHwxNzgxOTg0NjgzfDA&ixlib=rb-4.1.0&q=85"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Use Phosphor icons or Lucide icons.",
+    "Implement the site using raw Tailwind classes on semantic HTML elements. Use Shadcn sparingly (e.g. for contact form).",
+    "Hero slider MUST have smooth fade transitions. The text MUST be overlaid cleanly (use bg-black/40 across the slider).",
+    "Create dynamic pages (routing via react-router) for each Service and Package, rendering dummy SEO blog content and a contact form.",
+    "Add 'data-testid' to ALL interactive elements.",
+    "WhatsApp CTA must be fixed/floating on mobile, and clearly visible on desktop.",
+    "Avoid Inter/Roboto. Use Cormorant Garamond for headings and Manrope for body text. Make sure to apply styling in .js files as frontend doesn't use typescript."
+  ]
+}
