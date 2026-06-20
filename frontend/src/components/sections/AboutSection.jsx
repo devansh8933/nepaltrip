@@ -54,7 +54,7 @@ export default function AboutSection({ full = false }) {
                   we would love to be yours next.
                 </p>
                 <p>
-                  Whether you're searching “Travel Agency Near Me” for a quick weekend escape, a
+                  Whether you&apos;re searching “Travel Agency Near Me” for a quick weekend escape, a
                   Char Dham Yatra Package, a Kailash Mansarovar Yatra, a Muktinath Darshan Package
                   or a romantic Kashmir Honeymoon Package — Nepal Trip is one call away.
                 </p>

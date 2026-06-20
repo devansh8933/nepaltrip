@@ -7,7 +7,7 @@ export default function ContactSection() {
         <div className="lg:col-span-5">
           <p className="overline text-[#EAA015] mb-5">Get in Touch</p>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light leading-[1.05]">
-            Let's plan your
+            Let&apos;s plan your
             <br />
             next <em className="text-[#EAA015] not-italic">journey</em>.
           </h2>

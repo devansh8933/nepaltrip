@@ -9,7 +9,7 @@ export default function TestimonialsSection() {
     >
       <div className="container-pad mx-auto">
         <div className="max-w-2xl mb-14">
-          <p className="overline text-[#DC143C] mb-5">Travellers' Words</p>
+          <p className="overline text-[#DC143C] mb-5">Travellers&apos; Words</p>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-[#1C3144] leading-[1.05]">
             Real journeys,
             <br />
