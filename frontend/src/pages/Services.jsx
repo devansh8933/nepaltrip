@@ -2,11 +2,17 @@ import { Link } from "react-router-dom";
 import * as Icons from "lucide-react";
 import { SERVICES } from "@/data/content";
 import PageHeader from "@/components/PageHeader";
+import SEO from "@/components/SEO";
 import { ArrowUpRight } from "lucide-react";
 
 export default function Services() {
   return (
     <div data-testid="services-page">
+      <SEO
+        title="Travel Services — Tour Operator, Airline & Visa"
+        description="End-to-end travel services from Nepal Trip — tour operator, airline ticketing, railway ticketing, cruise, hotel booking, passport, visa, car rental and travel insurance."
+        path="/services"
+      />
       <PageHeader
         overline="Our Services"
         title="Everything you need for a perfect trip."

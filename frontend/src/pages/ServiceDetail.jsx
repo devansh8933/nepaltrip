@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { SERVICES } from "@/data/content";
 import LeadForm from "@/components/LeadForm";
+import SEO from "@/components/SEO";
 import { ArrowLeft } from "lucide-react";
 
 export default function ServiceDetail() {
@@ -10,6 +11,12 @@ export default function ServiceDetail() {
 
   return (
     <div data-testid="service-detail-page">
+      <SEO
+        title={`${service.title} — Nepal Trip`}
+        description={`${service.title} by Nepal Trip — ${service.short} Trusted Tour Operator in Gorakhpur. Call +91 9580261255.`}
+        path={`/services/${service.slug}`}
+        image={service.image}
+      />
       {/* Hero */}
       <section className="relative h-[60vh] min-h-[420px] overflow-hidden bg-[#1C3144]">
         <img

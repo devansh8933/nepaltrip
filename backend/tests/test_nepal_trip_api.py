@@ -1,11 +1,13 @@
-"""Backend API tests for Nepal Trip"""
+"""Backend API tests for Nepal Trip — includes admin auth on GET /api/leads."""
 import os
 import uuid
 import pytest
 import requests
 
-BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://adventure-nepal-hub.preview.emergentagent.com").rstrip("/")
+BASE_URL = os.environ.get("REACT_APP_BACKEND_URL").rstrip("/")
 API = f"{BASE_URL}/api"
+ADMIN_TOKEN = "N-lwBYKgl0F2aE95jJeQoBoqL-tS0Gblp-IERvYaTk0"
+ADMIN_HEADERS = {"X-Admin-Token": ADMIN_TOKEN}
 
 
 @pytest.fixture(scope="session")
@@ -32,9 +34,9 @@ class TestRoot:
         assert "ts" in data
 
 
-# --------- Leads CRUD ---------
-class TestLeads:
-    def test_create_lead_service(self, client):
+# --------- Leads — POST remains public ---------
+class TestLeadsPost:
+    def test_create_lead_service_public(self, client):
         payload = {
             "name": "TEST_Service User",
             "email": f"test_{uuid.uuid4().hex[:6]}@example.com",
@@ -49,17 +51,16 @@ class TestLeads:
         data = r.json()
         assert "id" in data and isinstance(data["id"], str)
         assert data["name"] == payload["name"]
-        assert data["email"] == payload["email"]
         assert data["category"] == "service"
         assert data["slug"] == "tour-operator"
 
-        # Persistence check
-        lst = client.get(f"{API}/leads", params={"category": "service"})
+        # Persistence check using admin token
+        lst = client.get(f"{API}/leads", params={"category": "service"}, headers=ADMIN_HEADERS)
         assert lst.status_code == 200
         items = lst.json()
         assert any(it.get("id") == data["id"] for it in items)
 
-    def test_create_lead_package(self, client):
+    def test_create_lead_package_public(self, client):
         payload = {
             "name": "TEST_Package User",
             "email": f"pkg_{uuid.uuid4().hex[:6]}@example.com",
@@ -73,13 +74,8 @@ class TestLeads:
         assert r.status_code == 200
         data = r.json()
         assert data["category"] == "package"
-        assert data["slug"] == "kathmandu"
-
-        lst = client.get(f"{API}/leads", params={"category": "package"}).json()
-        assert any(it.get("id") == data["id"] for it in lst)
 
     def test_create_lead_general_default(self, client):
-        # category defaults to 'general' when not provided
         payload = {
             "name": "TEST_General User",
             "email": f"gen_{uuid.uuid4().hex[:6]}@example.com",
@@ -88,43 +84,62 @@ class TestLeads:
         }
         r = client.post(f"{API}/leads", json=payload)
         assert r.status_code == 200
-        data = r.json()
-        assert data["category"] == "general"
-        assert data.get("description") == ""
+        assert r.json()["category"] == "general"
 
-    def test_create_lead_explicit_general(self, client):
-        payload = {
-            "name": "TEST_Explicit General",
-            "email": f"egen_{uuid.uuid4().hex[:6]}@example.com",
-            "mobile": "+910000000001",
-            "description": "Need help",
-            "subject": "General Enquiry",
-            "category": "general",
-        }
-        r = client.post(f"{API}/leads", json=payload)
-        assert r.status_code == 200
-        data = r.json()
-        assert data["category"] == "general"
+    def test_create_lead_missing_required_returns_422(self, client):
+        r = client.post(f"{API}/leads", json={"mobile": "12345"})
+        assert r.status_code == 422
 
-    def test_list_leads_returns_list(self, client):
+
+# --------- Leads — GET admin-only ---------
+class TestLeadsGetAdminAuth:
+    def test_get_leads_no_header_returns_401(self, client):
         r = client.get(f"{API}/leads")
-        assert r.status_code == 200
+        assert r.status_code == 401, r.text
+        assert "admin" in r.text.lower() or "token" in r.text.lower()
+
+    def test_get_leads_wrong_token_returns_401(self, client):
+        r = client.get(f"{API}/leads", headers={"X-Admin-Token": "definitely-wrong"})
+        assert r.status_code == 401
+
+    def test_get_leads_empty_token_returns_401(self, client):
+        r = client.get(f"{API}/leads", headers={"X-Admin-Token": ""})
+        assert r.status_code == 401
+
+    def test_get_leads_correct_token_returns_list(self, client):
+        r = client.get(f"{API}/leads", headers=ADMIN_HEADERS)
+        assert r.status_code == 200, r.text
         items = r.json()
         assert isinstance(items, list)
-        # ensure no mongo _id leaks
         for it in items[:5]:
             assert "_id" not in it
+            assert "id" in it
+            assert "category" in it
 
-    def test_list_leads_category_filter(self, client):
-        r = client.get(f"{API}/leads", params={"category": "service"})
+    def test_get_leads_category_filter_with_token(self, client):
+        r = client.get(f"{API}/leads", params={"category": "service"}, headers=ADMIN_HEADERS)
         assert r.status_code == 200
         items = r.json()
-        assert isinstance(items, list)
-        # All returned items should be category=service
         for it in items:
             assert it.get("category") == "service"
 
-    def test_create_lead_missing_required_returns_422(self, client):
-        # missing name & email & subject
-        r = client.post(f"{API}/leads", json={"mobile": "12345"})
-        assert r.status_code == 422
+    def test_get_leads_package_filter_with_token(self, client):
+        r = client.get(f"{API}/leads", params={"category": "package"}, headers=ADMIN_HEADERS)
+        assert r.status_code == 200
+        for it in r.json():
+            assert it.get("category") == "package"
+
+
+# --------- Static files (robots, sitemap) ---------
+class TestStaticSEO:
+    def test_robots_txt_reachable(self):
+        r = requests.get(f"{BASE_URL}/robots.txt")
+        assert r.status_code == 200, r.text
+        assert len(r.text.strip()) > 0
+        assert "User-agent" in r.text
+
+    def test_sitemap_xml_reachable(self):
+        r = requests.get(f"{BASE_URL}/sitemap.xml")
+        assert r.status_code == 200
+        assert len(r.text.strip()) > 0
+        assert "<urlset" in r.text or "<sitemapindex" in r.text

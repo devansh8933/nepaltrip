@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Header
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -17,6 +17,7 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
+ADMIN_TOKEN = os.environ.get('ADMIN_TOKEN', '')
 
 app = FastAPI(title="Nepal Trip API")
 api_router = APIRouter(prefix="/api")
@@ -63,7 +64,13 @@ async def create_lead(payload: LeadCreate):
 
 
 @api_router.get("/leads", response_model=List[Lead])
-async def list_leads(category: Optional[str] = None, limit: int = 200):
+async def list_leads(
+    category: Optional[str] = None,
+    limit: int = 200,
+    x_admin_token: Optional[str] = Header(default=None, alias="X-Admin-Token"),
+):
+    if not ADMIN_TOKEN or x_admin_token != ADMIN_TOKEN:
+        raise HTTPException(status_code=401, detail="Invalid or missing admin token")
     query = {}
     if category:
         query["category"] = category

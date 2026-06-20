@@ -9,6 +9,7 @@ import Packages from "@/pages/Packages";
 import PackageDetail from "@/pages/PackageDetail";
 import Testimonials from "@/pages/Testimonials";
 import Contact from "@/pages/Contact";
+import AdminLeads from "@/pages/AdminLeads";
 import NotFound from "@/pages/NotFound";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -26,6 +27,7 @@ function App() {
             <Route path="/packages/:slug" element={<PackageDetail />} />
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin/leads" element={<AdminLeads />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
