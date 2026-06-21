@@ -18,6 +18,7 @@ import AdminLogin from "@/pages/admin/AdminLogin";
 import AdminLayout from "@/pages/admin/AdminLayout";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import AdminLeadsPage from "@/pages/admin/AdminLeadsPage";
+import AdminUsersPage from "@/pages/admin/AdminUsersPage";
 
 import { Toaster } from "@/components/ui/sonner";
 
@@ -52,6 +53,7 @@ function App() {
             >
               <Route index element={<AdminDashboard />} />
               <Route path="leads" element={<AdminLeadsPage />} />
+              <Route path="users" element={<AdminUsersPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

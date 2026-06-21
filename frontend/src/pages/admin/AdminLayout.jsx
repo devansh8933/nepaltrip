@@ -1,12 +1,13 @@
 import { NavLink, Outlet, useNavigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useAuth } from "@/lib/api";
-import { LayoutDashboard, Inbox, LogOut, Mountain, ExternalLink } from "lucide-react";
+import { LayoutDashboard, Inbox, LogOut, Mountain, ExternalLink, Users } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 
 const NAV = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/admin/leads", label: "All Enquiries", icon: Inbox },
+  { to: "/admin/users", label: "Admin Users", icon: Users },
 ];
 
 export default function AdminLayout() {

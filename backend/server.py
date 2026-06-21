@@ -117,6 +117,16 @@ class LoginResponse(BaseModel):
     user: dict
 
 
+class AdminUserCreate(BaseModel):
+    email: str
+    password: str
+    name: Optional[str] = "Admin"
+
+
+class AdminPasswordUpdate(BaseModel):
+    password: str
+
+
 # ---------- Routes: Public ----------
 @api_router.get("/")
 async def root():
@@ -256,6 +266,59 @@ async def delete_lead(lead_id: str, current: dict = Depends(get_current_admin)):
     res = await db.leads.delete_one({"id": lead_id})
     if res.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Lead not found")
+    return {"ok": True}
+
+
+# ---------- Routes: Admin user management ----------
+@api_router.get("/admin/users")
+async def list_admin_users(current: dict = Depends(get_current_admin)):
+    cursor = db.users.find({}, {"_id": 0, "password_hash": 0}).sort("created_at", 1)
+    return await cursor.to_list(100)
+
+
+@api_router.post("/admin/users", status_code=201)
+async def create_admin_user(payload: AdminUserCreate, current: dict = Depends(get_current_admin)):
+    email = (payload.email or "").lower().strip()
+    if not email or "@" not in email:
+        raise HTTPException(status_code=400, detail="Valid email required")
+    if not payload.password or len(payload.password) < 6:
+        raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
+    existing = await db.users.find_one({"email": email})
+    if existing:
+        raise HTTPException(status_code=409, detail="An admin with this email already exists")
+    user = {
+        "id": str(uuid.uuid4()),
+        "email": email,
+        "password_hash": hash_password(payload.password),
+        "name": payload.name or "Admin",
+        "role": "admin",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    }
+    await db.users.insert_one(user)
+    return {"id": user["id"], "email": user["email"], "name": user["name"], "role": user["role"], "created_at": user["created_at"]}
+
+
+@api_router.patch("/admin/users/{user_id}/password")
+async def reset_admin_password(user_id: str, payload: AdminPasswordUpdate, current: dict = Depends(get_current_admin)):
+    if not payload.password or len(payload.password) < 6:
+        raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
+    target = await db.users.find_one({"id": user_id})
+    if not target:
+        raise HTTPException(status_code=404, detail="User not found")
+    await db.users.update_one({"id": user_id}, {"$set": {"password_hash": hash_password(payload.password)}})
+    return {"ok": True}
+
+
+@api_router.delete("/admin/users/{user_id}")
+async def delete_admin_user(user_id: str, current: dict = Depends(get_current_admin)):
+    if user_id == current.get("id"):
+        raise HTTPException(status_code=400, detail="You cannot delete your own account")
+    total = await db.users.count_documents({})
+    if total <= 1:
+        raise HTTPException(status_code=400, detail="Cannot delete the last admin account")
+    res = await db.users.delete_one({"id": user_id})
+    if res.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="User not found")
     return {"ok": True}
 
 
