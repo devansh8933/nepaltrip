@@ -67,6 +67,13 @@ export default function AdminLeads() {
 
   useEffect(() => { fetchLeads(); /* eslint-disable-next-line */ }, [category, status]);
 
+  useEffect(() => {
+    if (!selected) return;
+    const onKey = (e) => { if (e.key === "Escape") setSelected(null); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selected]);
+
   const counts = useMemo(() => {
     const c = { all: items.length, general: 0, service: 0, package: 0 };
     items.forEach((it) => { c[it.category] = (c[it.category] || 0) + 1; });
