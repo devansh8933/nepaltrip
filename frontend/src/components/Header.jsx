@@ -62,13 +62,22 @@ export default function Header() {
           ))}
         </nav>
 
-        <Link
-          to="/contact"
-          data-testid="header-cta-enquire"
-          className="hidden lg:inline-flex items-center px-6 py-3 bg-[#1C3144] text-white text-xs uppercase tracking-[0.2em] hover:bg-[#DC143C] transition-colors"
-        >
-          Enquire
-        </Link>
+        <div className="hidden lg:flex items-center gap-3">
+          <Link
+            to="/admin/login"
+            data-testid="header-admin-login"
+            className="link-underline text-xs uppercase tracking-[0.2em] text-[#1C3144]/70 hover:text-[#DC143C]"
+          >
+            Admin Login
+          </Link>
+          <Link
+            to="/contact"
+            data-testid="header-cta-enquire"
+            className="inline-flex items-center px-6 py-3 bg-[#1C3144] text-white text-xs uppercase tracking-[0.2em] hover:bg-[#DC143C] transition-colors"
+          >
+            Enquire
+          </Link>
+        </div>
 
         <button
           type="button"
@@ -103,6 +112,13 @@ export default function Header() {
               className="mt-2 inline-flex items-center justify-center px-6 py-3 bg-[#1C3144] text-white text-xs uppercase tracking-[0.2em]"
             >
               Enquire
+            </Link>
+            <Link
+              to="/admin/login"
+              data-testid="mobile-admin-login"
+              className="inline-flex items-center justify-center px-6 py-3 border border-[#1C3144]/30 text-[#1C3144] text-xs uppercase tracking-[0.2em]"
+            >
+              Admin Login
             </Link>
           </div>
         </div>

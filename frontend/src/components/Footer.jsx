@@ -74,16 +74,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-pad mx-auto py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/45">
           <p>© {new Date().getFullYear()} Nepal Trip. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <p>Best Tour and Travel Agency in Gorakhpur</p>
-            <Link
-              data-testid="footer-admin-login"
-              to="/admin/login"
-              className="hover:text-[#EAA015] transition-colors"
-            >
-              Admin Login
-            </Link>
-          </div>
+          <p>Best Tour and Travel Agency in Gorakhpur</p>
         </div>
       </div>
     </footer>
