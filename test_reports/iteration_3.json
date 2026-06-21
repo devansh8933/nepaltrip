@@ -1,0 +1,49 @@
+{
+  "summary": "Iteration 3: Full validation of the new JWT email/password admin auth replacing the X-Admin-Token gate. Rewrote /app/backend/tests/test_nepal_trip_api.py for the new flow — 32/32 pytest tests PASS covering auth/login, /api/auth/me, admin leads list/filter/search/stats, PATCH+DELETE with auth, public POST /api/leads, end-to-end public→admin, and removal of the old /api/leads GET (now 401). Frontend Playwright run covers /admin/login (wrong + correct creds, toasts, redirect), dashboard testids (stat-*, bycat-*, top-sources-list), JWT persisted in localStorage as nepaltrip_admin_jwt, reload-stays-authenticated, /admin/leads tabs/search/drawer/status/notes, logout clears token and redirects, and /admin redirects to /admin/login when not authed. Everything passes.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "/admin/leads detail drawer",
+        "issues": [
+          "Pressing the Escape key does not close the lead detail drawer (data-testid=lead-detail-drawer). The drawer can only be dismissed by clicking the overlay/close button. Minor UX nit — Radix Sheet usually closes on Escape by default; verify the onOpenChange handler is wired."
+        ]
+      }
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_nepal_trip_api.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "(Optional, minor) Allow Escape key to close the lead detail drawer on /admin/leads — wire onOpenChange so users can dismiss with keyboard.",
+    "(Optional, minor) test_create_lead_service_public returns a string instead of None — emits PytestReturnNotNoneWarning. Not a code bug, just a test cosmetic."
+  ],
+  "critical_code_review_comments": [
+    "server.py: get_current_admin returns 401 when role != admin via raise HTTPException(403). The startup event uses bcrypt and idempotently updates the password if it differs — verified by login test on a cold start; password reset path works.",
+    "server.py: ADMIN_EMAIL is .lower().strip() and login lower-cases incoming email — case-insensitive login confirmed by test_login_email_case_insensitive.",
+    "api.js: response interceptor clears the JWT and redirects to /admin/login on any 401 — good. AuthProvider boots by calling /auth/me with the stored token; clears token if invalid. Behavior verified by reload-keeps-auth test.",
+    "Old GET /api/leads is fully removed from server.py — now correctly returns 405 (Method Not Allowed) since only POST is mounted at that path. Test_get_old_leads_not_available accepts 401/404/405 and passes (405).",
+    "All admin endpoints exclude MongoDB _id via projection — no ObjectId leakage; verified.",
+    "Token TTL is 7 days; JWT_SECRET is loaded from .env via os.environ['JWT_SECRET'] (fails fast if missing). Good.",
+    "Backend uses deprecated @app.on_event('startup') — works but FastAPI recommends lifespan handler. Non-blocking."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_nepal_trip_api.py"
+  ],
+  "success_rate": {
+    "backend": "100% (32/32 pytest)",
+    "frontend": "~98% (all required flows pass; only minor UX nit: Escape doesn't close drawer)"
+  },
+  "test_credentials": "ADMIN_EMAIL=devanshpandey8933@gmail.com, ADMIN_PASSWORD=nepaltrip123 (from /app/backend/.env and /app/memory/test_credentials.md). JWT stored in localStorage key 'nepaltrip_admin_jwt'.",
+  "seed_data_creation": "Several TEST_-prefixed leads (service/package/general + TEST_E2E*, SEARCHME*) created via POST /api/leads during testing; left in DB so the dashboard has populated stats (18 total, 16 new, 2 in_progress, 0 closed at end of run).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend tests in /app/backend/tests/test_nepal_trip_api.py now use JWT (Bearer) admin auth via fixtures admin_token + auth_headers, derived from ADMIN_EMAIL/ADMIN_PASSWORD env or fallback constants. Run with: REACT_APP_BACKEND_URL=https://adventure-nepal-hub.preview.emergentagent.com pytest /app/backend/tests/test_nepal_trip_api.py -v. Frontend testids: admin-login-page, admin-email-input, admin-password-input, admin-login-submit, admin-logout-btn, stat-total, stat-new, stat-in-progress, stat-closed, bycat-general/service/package, top-sources-list, leads-category-all/general/service/package, leads-search, lead-open-<id>, lead-detail-drawer, detail-status-new/in_progress/closed, lead-notes-input, lead-notes-save, lead-status-<id>. When automating the drawer, do not click the logout button while the drawer is open — Radix Sheet sets pointer-events:none on the body so the click is swallowed (this is correct framework behavior, not an app bug).",
+  "rca of the issue": "N/A — no bugs found. The only minor finding (Escape doesn't dismiss the lead detail drawer) is a UX nit, not a functional regression."
+}
