@@ -65,7 +65,9 @@ export default function AdminLeads() {
     }
   };
 
-  useEffect(() => { fetchLeads(); /* eslint-disable-next-line */ }, [category, status]);
+  useEffect(() => {
+  fetchLeads();
+}, [category, status, fetchLeads]);
 
   useEffect(() => {
     if (!selected) return;
