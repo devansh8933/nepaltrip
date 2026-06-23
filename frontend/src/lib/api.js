@@ -1,7 +1,8 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+// Use REACT_APP_BACKEND_URL if provided, otherwise default to the deployed backend
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "https://nepaltrip.onrender.com";
 export const API = `${BACKEND_URL}/api`;
 
 export const WHATSAPP_NUMBER = "919580261255";
