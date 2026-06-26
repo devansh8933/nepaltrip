@@ -66,7 +66,8 @@ Honeymoon Package Nepal"
 "telephone":"+919580261255",
 "address":{
 "@type":"PostalAddress",
-"addressLocality":"Sumer sagar near RR palace hotel ,Gorakhpur",
+ "streetAddress":"Sumer Sagar, Near RR Palace Hotel",
+ "addressLocality":"Gorakhpur",
 "addressRegion":"Uttar Pradesh",
 "addressCountry":"IN"
 }
