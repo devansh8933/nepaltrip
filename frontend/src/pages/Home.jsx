@@ -10,10 +10,10 @@ export default function Home() {
   return (
     <div data-testid="home-page">
       <SEO
-        title="Best Tour and Travel Agency in Gorakhpur"
-        description="Nepal Trip — Discover Nepal Holiday Tours, Honeymoon Packages, Kathmandu Pokhara Tour, Char Dham Yatra, Kailash Mansarovar, Muktinath & Kashmir tours from Gorakhpur."
-        path="/"
-      />
+  title="Nepal Tour Packages from Gorakhpur | Kathmandu, Pokhara & Muktinath"
+  description="Book affordable Nepal tour packages from Gorakhpur with Kathmandu, Pokhara, Muktinath, Lumbini, Kailash Mansarovar and honeymoon tours. Trusted travel agency with customized holiday packages."
+  path="/"
+/>
       <HeroSlider />
       <AboutSection />
       <ServicesSection />
