@@ -67,7 +67,7 @@ export default function AdminLeads() {
 
   useEffect(() => {
   fetchLeads();
-}, [category, status, fetchLeads]);
+}, [category, status]);
 
   useEffect(() => {
     if (!selected) return;
