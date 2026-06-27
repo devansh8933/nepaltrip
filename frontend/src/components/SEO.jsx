@@ -2,10 +2,12 @@ import { Helmet } from "react-helmet-async";
 
 const SITE = "Nepal Trip";
 const BASE_DESC =
-  "Nepal Trip — Best Tour and Travel Agency in Gorakhpur. Nepal Holiday Tours, Honeymoon Packages, Pilgrimage Tours, Char Dham, Kailash Mansarovar, Kashmir, Kathmandu, Pokhara, Muktinath,नेपाल Trip is a trusted tour and travel agency in Gorakhpur offering Nepal tour packages, Kailash Mansarovar Yatra, Muktinath, Kathmandu, Pokhara, Kashmir, Ayodhya, Varanasi, Char Dham, honeymoon packages and customized holiday tours at affordable prices.";
+  "Nepal Trip is a trusted travel agency in Gorakhpur offering Nepal tour packages, Kathmandu, Pokhara, Muktinath, Kailash Mansarovar Yatra, Kashmir, Ayodhya, Varanasi, Char Dham and customized honeymoon packages at affordable prices.";
 
 export default function SEO({ title, description, path = "/", image }) {
-  const fullTitle = title ? `${title} | ${SITE}` : `${SITE} — Best Tour and Travel Agency in Gorakhpur`;
+  const fullTitle = title
+  ? `${title} | ${SITE}`
+  : "Nepal Tour Packages from Gorakhpur | Nepal Trip";
   const desc = description || BASE_DESC;
   const url = `https://nepaltrip.vercel.app${path}`;
   return (
