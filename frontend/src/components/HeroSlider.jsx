@@ -19,24 +19,25 @@ export default function HeroSlider() {
       data-testid="hero-section"
       className="relative w-full h-[88vh] min-h-[600px] overflow-hidden bg-[#1C3144]"
     >
-      {HERO_SLIDES.map((s, i) => (
-        <div
-          key={s.url}
-          className={`slide absolute inset-0 ${i === idx ? "opacity-100" : "opacity-0"}`}
-          aria-hidden={i !== idx}
-        >
-          <img
-            src={s.url}
-            alt={s.title}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              transform: i === idx ? "scale(1.05)" : "scale(1)",
-              transition: "transform 8s ease-out",
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20" />
-        </div>
-      ))}
+     <div
+  className="absolute inset-0"
+  aria-hidden={false}
+>
+  <img
+    src={HERO_SLIDES[idx].url}
+    alt={HERO_SLIDES[idx].title}
+    className="absolute inset-0 w-full h-full object-cover"
+    loading="eager"
+    fetchPriority="high"
+    decoding="async"
+    style={{
+      transform: "scale(1.05)",
+      transition: "transform 8s ease-out",
+    }}
+  />
+
+  <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20" />
+</div>
 
       {/* Overlay content */}
       <div className="relative h-full container-pad mx-auto flex flex-col justify-center">
