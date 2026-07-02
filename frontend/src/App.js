@@ -1,24 +1,25 @@
 import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import Layout from "@/components/Layout";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { AuthProvider } from "@/lib/api";
 
-import Home from "@/pages/Home";
-import About from "@/pages/About";
-import Services from "@/pages/Services";
-import ServiceDetail from "@/pages/ServiceDetail";
-import Packages from "@/pages/Packages";
-import PackageDetail from "@/pages/PackageDetail";
-import Testimonials from "@/pages/Testimonials";
-import Contact from "@/pages/Contact";
-import NotFound from "@/pages/NotFound";
+const Home = lazy(() => import("@/pages/Home"));
+const About = lazy(() => import("@/pages/About"));
+const Services = lazy(() => import("@/pages/Services"));
+const ServiceDetail = lazy(() => import("@/pages/ServiceDetail"));
+const Packages = lazy(() => import("@/pages/Packages"));
+const PackageDetail = lazy(() => import("@/pages/PackageDetail"));
+const Testimonials = lazy(() => import("@/pages/Testimonials"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
 
-import AdminLogin from "@/pages/admin/AdminLogin";
-import AdminLayout from "@/pages/admin/AdminLayout";
-import AdminDashboard from "@/pages/admin/AdminDashboard";
-import AdminLeadsPage from "@/pages/admin/AdminLeadsPage";
-import AdminUsersPage from "@/pages/admin/AdminUsersPage";
+const AdminLogin = lazy(() => import("@/pages/admin/AdminLogin"));
+const AdminLayout = lazy(() => import("@/pages/admin/AdminLayout"));
+const AdminDashboard = lazy(() => import("@/pages/admin/AdminDashboard"));
+const AdminLeadsPage = lazy(() => import("@/pages/admin/AdminLeadsPage"));
+const AdminUsersPage = lazy(() => import("@/pages/admin/AdminUsersPage"));
 
 import { Toaster } from "@/components/ui/sonner";
 
@@ -27,7 +28,8 @@ function App() {
     <div className="App">
       <AuthProvider>
         <BrowserRouter>
-          <Routes>
+    <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
             {/* Public site */}
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
@@ -55,8 +57,9 @@ function App() {
               <Route path="leads" element={<AdminLeadsPage />} />
               <Route path="users" element={<AdminUsersPage />} />
             </Route>
-          </Routes>
-        </BrowserRouter>
+         </Routes>
+</Suspense>
+</BrowserRouter>
       </AuthProvider>
       <Toaster richColors position="top-center" />
     </div>
