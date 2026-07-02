@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 
 import HeroSlider from "@/components/HeroSlider";
-import SEO from "@/components/SEO";
 
 const AboutSection = lazy(() =>
   import("@/components/sections/AboutSection")
