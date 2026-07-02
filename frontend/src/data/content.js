@@ -1,31 +1,35 @@
 // Centralized SEO content for Nepal Trip
 // Each service & package page has UNIQUE blog content with distributed keywords.
-
+import hero1 from "@/assets/hero1.webp";
+import hero2 from "@/assets/hero2.webp";
+import hero3 from "@/assets/hero3.webp";
+import hero4 from "@/assets/hero4.webp";
+import hero5 from "@/assets/hero5.webp";
 export const HERO_SLIDES = [
   {
     title: "Himalayan Majesty",
     caption: "Trek the roof of the world",
-    url: "https://images.unsplash.com/photo-1637846959991-18e54d6e2035?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwxfHxoaW1hbGF5YXMlMjBtb3VudGFpbiUyMHBlYWt8ZW58MHx8fHwxNzgxOTg0NjgzfDA&ixlib=rb-4.1.0&q=85",
+    url: hero1,
   },
   {
     title: "Kashmir, Paradise on Earth",
     caption: "Dal Lake, gardens & shikara rides",
-    url: "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwxfHxrYXNobWlyJTIwZGFsJTIwbGFrZXxlbnwwfHx8fDE3ODE5ODQ2ODN8MA&ixlib=rb-4.1.0&q=85",
+    url: hero2,
   },
   {
     title: "Kailash Mansarovar",
     caption: "A pilgrimage of a lifetime",
-    url: "https://images.unsplash.com/photo-1606163338600-0e212c836bb3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwxfHxtb3VudCUyMGthaWxhc2h8ZW58MHx8fHwxNzgxOTg0NjgzfDA&ixlib=rb-4.1.0&q=85",
+    url: hero3,
   },
   {
     title: "Kathmandu Heritage",
     caption: "Temples, stupas & timeless streets",
-    url: "https://images.unsplash.com/photo-1648298470994-7065f521375c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODh8MHwxfHNlYXJjaHwxfHxrYXRobWFuZHUlMjB0ZW1wbGV8ZW58MHx8fHwxNzgxOTg0NjgzfDA&ixlib=rb-4.1.0&q=85",
+    url: hero4,
   },
   {
     title: "Pokhara Serenity",
     caption: "Phewa Lake & Annapurna views",
-    url: "https://images.pexels.com/photos/6423847/pexels-photo-6423847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    url: hero5,
   },
 ];
 
