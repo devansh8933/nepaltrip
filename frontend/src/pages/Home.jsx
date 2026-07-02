@@ -1,4 +1,3 @@
-import HeroSlider from "@/components/HeroSlider";
 import { lazy, Suspense } from "react";
 
 import HeroSlider from "@/components/HeroSlider";
